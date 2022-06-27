@@ -10,6 +10,8 @@ function App() {
   const [comments, setComments] = useState(data['comments']);
   const [currentUser, setCurrentUser] = useState(data.currentUser)
 
+  console.log(comments)
+
   let comments_map = Array.from(comments)
 
   return (
@@ -21,12 +23,18 @@ function App() {
               return <Comment 
                 key={comment.id} 
                 comment={comment}
+                comments={comments}
+                setComments={setComments}
                 currentUser={currentUser}
               />
             })
           }
         </div>
-        <InputBox/>
+        <InputBox
+          comments={comments}
+          currentUser={currentUser}
+          setComments={setComments}
+        />
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const User = styled.div`
     display: flex;
@@ -22,6 +23,12 @@ const User = styled.div`
     }
     .date {
         color: hsl(211, 10%, 45%);
+        font-size: .9rem;
+
+        @media (min-width: 740px)
+        {
+            font-size: 1rem;
+        }
     }
 
 `
@@ -36,7 +43,13 @@ const Avatar = ({user, createdAt, currentUser}) => {
         <img src={user["image"].webp} alt="user image" className="avatar" />
         <span className="user-name">{user.username}</span>
         {currentuser}
-        <span className="date">{createdAt}</span>
+        <span className="date">
+            {
+                isNaN(createdAt) ? createdAt: formatDistanceToNow(createdAt, {
+                    includeSeconds: true,
+                }).replace('less than', '') + ' ago'
+            } 
+        </span>
     </User>
   )
 }

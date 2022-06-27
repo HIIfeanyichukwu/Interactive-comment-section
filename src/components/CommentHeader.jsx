@@ -13,7 +13,7 @@ const Header = styled.header`
   }
 `
 
-const CommentHeader = ({user, createdAt, currentUser}) => {
+const CommentHeader = ({user, createdAt, currentUser, setReplyToggle}) => {
   let UserOptions;
   if (currentUser) {
     if (user.username == currentUser.username) {
@@ -30,7 +30,7 @@ const CommentHeader = ({user, createdAt, currentUser}) => {
     {(UserOptions) ? 
     <Suspense>
       <UserOptions/> 
-    </Suspense>: <Reply/>}
+    </Suspense>: <Reply setReplyToggle={setReplyToggle}/>}
   </Header>
   )
 }

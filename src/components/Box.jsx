@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import user from '../images/avatars/image-juliusomo.png'
+import userImg from '../images/avatars/image-juliusomo.png'
 
 const IMG = styled.img`
   width: 40px;
@@ -17,11 +17,20 @@ const TextArea = styled.textarea`
   font-size: 1rem;
 `
 
-const Box = (props) => {
+const Box = ({setContent, content, user, purpose}) => {
+  const handleInput = (e) => {
+    setContent(e.target.value);
+  }
+  console.log(user)
   return (
     <>
-      <IMG src={user} alt="user img" />
-      <TextArea placeholder='Add a comment...' className="comment-section">
+      <IMG src={userImg} alt="user img" />
+      <TextArea 
+        value={content}
+        onChange={handleInput}
+        placeholder='Add a comment...' className="comment-section"
+        autoFocus
+        >
       </TextArea>
     </>
   )

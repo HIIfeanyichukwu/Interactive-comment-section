@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Box from '../components/Box'
 
@@ -11,6 +11,7 @@ const Div = styled.div`
     border-radius: 8px;
     padding-block-end: 5rem;
     position: relative;
+    margin-block: 1rem;
 
     img,button {
         position: absolute;
@@ -50,11 +51,25 @@ const Btn = styled.button`
     }
 `
 
-const ReplyBox = () => {
+const ReplyBox = ({setReplyToggle, user, commentId, setComments, comments}) => {
+    const [content, setContent] = useState('')
+    const handleReply = (e) => {
+        e.preventDefault()
+    }
   return (
     <Div>
-        <Box />
-        <Btn>
+        <Box 
+            content={content}
+            setContent={setContent}
+            user={user}
+            purpose="reply"
+        />
+        <Btn
+            onClick={(e) => {
+                e.preventDefault()
+                setReplyToggle(false)
+            }}
+        >
             REPLY
         </Btn>
     </Div>

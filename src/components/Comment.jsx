@@ -1,8 +1,10 @@
-import React, { lazy } from 'react'
+import React, { lazy, Suspense, useState } from 'react'
 import styled from 'styled-components'
 import Score from './Score'
 import CommentContent from './CommentContent'
 import Replies from './Replies'
+import CommentReply from './CommentReply'
+
 
 const CommentMain = styled.div`
     & + & {
@@ -29,17 +31,34 @@ const CommentComponent = styled.div`
     }
 `
 
-const Comment = ({comment, currentUser}) => {
+const Comment = ({comments, comment, currentUser, setComments}) => {
+    const [replyToggle, setReplyToggle] = useState(false)
+
+    let ReplyBox = lazy(() => import('./ReplyBox'))
+
   return (
     <CommentMain >
 
         <CommentComponent className='comment-component'>
             <Score score={comment.score}/>
             <CommentContent 
-                comment={comment} 
+                comment={comment}
+                comments={comments}
+                setComments={setComments} 
                 currentUser={currentUser}
+                commentId={comment.id}
+                setReplyToggle={setReplyToggle}
             />
         </CommentComponent>
+
+        {
+            (replyToggle) ?
+            <Suspense>
+                <ReplyBox
+                    setReplyToggle={setReplyToggle}
+                />
+            </Suspense>: null
+        }
 
         {
             (comment.replies != undefined) ?
@@ -50,15 +69,15 @@ const Comment = ({comment, currentUser}) => {
 
                       return (
 
-                        <CommentComponent 
-                        className='comment-component'
-                        key={reply.id}>
-                            <Score score={reply.score}/>
-                            <CommentContent 
-                                comment={reply}
-                                currentUser={currentUser}
-                            />
-                        </CommentComponent>
+                        <CommentReply
+                            reply={reply}
+                            currentUser={currentUser}
+                            commentId={comment.id}
+                            comments={comments}
+                            setComments={setComments}
+                            key={reply.id}
+                        />
+
                       )
                     })
                 }

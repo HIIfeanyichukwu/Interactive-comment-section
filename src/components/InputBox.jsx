@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import Box from '../components/Box'
 
@@ -48,11 +48,32 @@ const Btn = styled.button`
     }
 `
 
-const InputBox = () => {
+const InputBox = ({setComments, comments, currentUser}) => {
+    const [content, setContent] = useState('')
+    let comment = {
+        content,
+        createdAt: Date.now(),
+        id: comments.length + 1,
+        replies: [],
+        user: currentUser,
+        score: 0,
+    }
+    const Send = (e) => {
+        e.preventDefault();
+        if (!content) return;
+        comments = comments.concat([comment])
+        setComments(comments);
+        setContent('');
+    }
   return (
     <Div>
-        <Box />
-        <Btn>
+        <Box 
+            setContent={setContent}
+            content={content}
+        />
+        <Btn
+            onClick={Send}
+        >
             SEND
         </Btn>
     </Div>
