@@ -8,10 +8,13 @@ const Header = styled.header`
   justify-content: space-between;
 `
 
-const CommentHeader = () => {
+const CommentHeader = ({user, createdAt}) => {
   return (
   <Header>
-    <Avatar/>
+    <Avatar 
+      user={user} 
+      createdAt={createdAt}
+    />
     <Reply/>
   </Header>
   )

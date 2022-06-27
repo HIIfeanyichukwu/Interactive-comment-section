@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import amy from '../images/avatars/image-amyrobson.png'
 
 const User = styled.div`
     display: flex;
@@ -20,12 +19,12 @@ const User = styled.div`
 
 `
 
-const Avatar = ({username, date}) => {
+const Avatar = ({user, createdAt}) => {
   return (
     <User>
-        <img src={amy} alt="" className="avatar" />
-        <span className="user-name">amyrobson</span>
-        <span className="date">1 month ago</span>
+        <img src={user["image"].webp} alt="user image" className="avatar" />
+        <span className="user-name">{user.username}</span>
+        <span className="date">{createdAt}</span>
     </User>
   )
 }

@@ -3,18 +3,35 @@ import styled from 'styled-components'
 import CommentHeader from './CommentHeader'
 
 const Main = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    order: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  order: 1;
+
+  .replyTo {
+    font-weight: 500;
+    color: hsl(238, 40%, 52%);
+  }
 `
 
-const CommentContent = () => {
+const CommentContent = ({comment}) => {
+
+  let {createdAt, user} = comment;
+  let replyingTo;
+  if (comment.replyingTo) {
+    replyingTo = <span className="replyTo">
+      @{comment.replyingTo}
+    </span>
+  }
+
   return (
     <Main>
-        <CommentHeader/>
+        <CommentHeader 
+          user={user}
+          createdAt={createdAt}
+        />
         <main className="comment-main">
-            Impressive! Though it seems the drag feature could be imporved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well
+          {replyingTo} {comment.content}
         </main>
     </Main>
   )

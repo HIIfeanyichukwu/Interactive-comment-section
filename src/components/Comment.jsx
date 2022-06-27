@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { lazy } from 'react'
 import styled from 'styled-components'
 import Score from './Score'
 import CommentContent from './CommentContent'
@@ -26,26 +26,35 @@ const CommentComponent = styled.div`
     }
 `
 
-const Comment = () => {
+const Comment = ({comment}) => {
   return (
     <Comments >
 
         <CommentComponent>
-            <Score/>
-            <CommentContent/>
+            <Score score={comment.score}/>
+            <CommentContent comment={comment}/>
         </CommentComponent>
 
-        <Replies>
-            <CommentComponent>
-                <Score/>
-                <CommentContent/>
-            </CommentComponent>
+        {
+            (comment.replies != undefined) ?
 
-            <CommentComponent>
-                <Score/>
-                <CommentContent/>
-            </CommentComponent>
-        </Replies>
+            <Replies>
+                {
+                    comment.replies.map(reply => {
+
+                      return (
+
+                        <CommentComponent key={reply.id}>
+                            <Score score={reply.score}/>
+                            <CommentContent comment={reply}/>
+                        </CommentComponent>
+                      )
+                    })
+                }
+               
+            </Replies>
+            : null
+        }
 
     </Comments>
   )
