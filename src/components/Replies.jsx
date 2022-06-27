@@ -2,17 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Div = styled.div`
-    margin-block-start: .5rem;
-    margin-inline-start: 1rem;
-    border-inline-start: 2px solid hsl(239, 57%, 85%);
-    padding-inline-start: 1rem;
+  margin-block-start: .5rem;
+  margin-inline-start: 1rem;
+  border-inline-start: 2px solid hsl(239, 57%, 85%);
+  padding-inline-start: 1rem;
 
 `
 
 const Replies = (props) => {
   return (
     <Div>
-        {props.children}
+      {props.children}
     </Div>
   )
 }

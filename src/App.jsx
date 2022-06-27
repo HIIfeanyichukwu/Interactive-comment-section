@@ -1,32 +1,31 @@
 import { useState } from 'react'
-import styled from 'styled-components'
 import './styles/App.css'
 import Comment from './components/Comment'
 import InputBox from './components/InputBox'
 import data from './util/data.json'
 
 
-const Comments = styled.div`
-  div + div {
-    margin-block-start: 1rem;
-  }
-`
 
 function App() {
   const [comments, setComments] = useState(data['comments']);
+  const [currentUser, setCurrentUser] = useState(data.currentUser)
 
   let comments_map = Array.from(comments)
 
   return (
     <div className="App">
       <div className="container">
-        <Comments>
+        <div className='comments'>
           {
             comments_map.map(comment => {
-              return <Comment key={comment.id} comment={comment}/>
+              return <Comment 
+                key={comment.id} 
+                comment={comment}
+                currentUser={currentUser}
+              />
             })
           }
-        </Comments>
+        </div>
         <InputBox/>
       </div>
     </div>

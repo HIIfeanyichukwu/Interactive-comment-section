@@ -4,11 +4,10 @@ import Score from './Score'
 import CommentContent from './CommentContent'
 import Replies from './Replies'
 
-const Comments = styled.div`
-    div + div {
-        margin-block-start: .5rem;
+const CommentMain = styled.div`
+    & + & {
+        margin-block-start: 1rem;
     }
-
 `
 
 const CommentComponent = styled.div`
@@ -21,18 +20,25 @@ const CommentComponent = styled.div`
     position: relative;
     flex-direction: column;
 
+    & + & {
+        margin-block-start: 1rem;
+    }
+
     @media (min-width: 740px) {
         flex-direction: row;
     }
 `
 
-const Comment = ({comment}) => {
+const Comment = ({comment, currentUser}) => {
   return (
-    <Comments >
+    <CommentMain >
 
-        <CommentComponent>
+        <CommentComponent className='comment-component'>
             <Score score={comment.score}/>
-            <CommentContent comment={comment}/>
+            <CommentContent 
+                comment={comment} 
+                currentUser={currentUser}
+            />
         </CommentComponent>
 
         {
@@ -44,9 +50,14 @@ const Comment = ({comment}) => {
 
                       return (
 
-                        <CommentComponent key={reply.id}>
+                        <CommentComponent 
+                        className='comment-component'
+                        key={reply.id}>
                             <Score score={reply.score}/>
-                            <CommentContent comment={reply}/>
+                            <CommentContent 
+                                comment={reply}
+                                currentUser={currentUser}
+                            />
                         </CommentComponent>
                       )
                     })
@@ -56,7 +67,7 @@ const Comment = ({comment}) => {
             : null
         }
 
-    </Comments>
+    </CommentMain>
   )
 }
 

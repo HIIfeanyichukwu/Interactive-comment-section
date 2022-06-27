@@ -5,6 +5,15 @@ import styled from 'styled-components'
 const Options = styled.div`
     display: flex;
     gap: 1rem;
+    position: absolute;
+    bottom: 1.5rem;
+    right: .8rem;
+    align-items: center;
+    margin-block-start: 0;
+
+    @media (min-width: 740px) {
+        position: static;
+    }
 `
 
 const Btn = styled.button`

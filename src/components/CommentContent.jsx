@@ -14,7 +14,7 @@ const Main = styled.div`
   }
 `
 
-const CommentContent = ({comment}) => {
+const CommentContent = ({comment, currentUser}) => {
 
   let {createdAt, user} = comment;
   let replyingTo;
@@ -29,6 +29,7 @@ const CommentContent = ({comment}) => {
         <CommentHeader 
           user={user}
           createdAt={createdAt}
+          currentUser={currentUser}
         />
         <main className="comment-main">
           {replyingTo} {comment.content}
