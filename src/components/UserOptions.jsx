@@ -50,15 +50,13 @@ const Btn = styled.button`
 
 const UserOptions = ({setDel, setEdit}) => {
 
-    const handleEdit = (e) => {
-
-    }
   return (
     <Options>
         <Btn 
             className='red'
             onClick={(e) => {
                 e.preventDefault()
+                console.log(typeof setDel)
                 setDel(true)
             }}
         >

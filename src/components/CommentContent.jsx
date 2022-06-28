@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { lazy, Suspense, useState } from 'react'
 import styled from 'styled-components'
 import CommentHeader from './CommentHeader'
 
@@ -58,9 +58,12 @@ const Btn = styled.button`
 `
 
 const CommentContent = ({comments, comment, currentUser, setComments, commentId, setReplyToggle}) => {
-  const [del, setDel] = useState(false)
   const [edit, setEdit] = useState(false)
   const [editContent, setEditContent] = useState(comment.content)
+  const [del, setDel] = useState(false)
+  console.log(del)
+
+  const Delete = lazy(() => import('./Delete')) ; 
 
   let {createdAt, user} = comment;
   let replyingTo;
@@ -99,39 +102,45 @@ const CommentContent = ({comments, comment, currentUser, setComments, commentId,
 
   return (
     <Main>
-      <div className="main-container">
-
-      <CommentHeader 
-        user={user}
-        createdAt={createdAt}
-        currentUser={currentUser}
-        setReplyToggle={setReplyToggle}
-        setDel={setDel}
-        setEdit={setEdit}
-        del={del}
-        edit={edit}
-      />
       {
-        (edit) ? 
-        <TextArea 
-        defaultValue={comment.content}
-        onChange={handleEdit}
-        placeholder='Add a comment...' className="comment-section"
-        autoFocus
-        >
-        </TextArea>:
-        <main className="comment-main">
-          {replyingTo}  {comment.content}
-        </main>
-      }
-
-      {
-        (edit) ? 
-        <Btn
-          onClick={handleUpdate}
-        >UPDATE</Btn>
+        (del) ?
+        <Suspense>
+          <Delete />
+        </Suspense>
         : null
       }
+      <div className="main-container">
+
+        <CommentHeader 
+          user={user}
+          createdAt={createdAt}
+          currentUser={currentUser}
+          setReplyToggle={setReplyToggle}
+          setDel={setDel}
+          setEdit={setEdit}
+          edit={edit}
+        />
+        {
+          (edit) ? 
+          <TextArea 
+          defaultValue={comment.content}
+          onChange={handleEdit}
+          placeholder='Add a comment...' className="comment-section"
+          autoFocus
+          >
+          </TextArea>:
+          <main className="comment-main">
+            {replyingTo}  {comment.content}
+          </main>
+        }
+
+        {
+          (edit) ? 
+          <Btn
+            onClick={handleUpdate}
+          >UPDATE</Btn>
+          : null
+        }
       </div>
     </Main>
   )

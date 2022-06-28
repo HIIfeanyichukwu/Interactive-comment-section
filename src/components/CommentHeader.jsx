@@ -13,7 +13,7 @@ const Header = styled.header`
   }
 `
 
-const CommentHeader = ({user, createdAt, currentUser, setReplyToggle, setDel, setEdit, del, edit}) => {
+const CommentHeader = ({user, createdAt, currentUser, setReplyToggle, setDel, setEdit, edit}) => {
   let UserOptions;
   if (currentUser) {
     if (user.username == currentUser.username) {
