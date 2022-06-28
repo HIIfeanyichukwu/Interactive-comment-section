@@ -56,6 +56,11 @@ const Comment = ({comments, comment, currentUser, setComments}) => {
             <Suspense>
                 <ReplyBox
                     setReplyToggle={setReplyToggle}
+                    user={comment.user}
+                    commentId={comment.id}
+                    setComments={setComments}
+                    comments={comments}
+                    currentUser={currentUser}
                 />
             </Suspense>: null
         }
@@ -75,7 +80,7 @@ const Comment = ({comments, comment, currentUser, setComments}) => {
                             commentId={comment.id}
                             comments={comments}
                             setComments={setComments}
-                            key={reply.id}
+                            key={reply.id + `${Date.now()}`}
                         />
 
                       )

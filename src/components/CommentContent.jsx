@@ -7,6 +7,7 @@ const Main = styled.div`
   flex-direction: column;
   gap: 1rem;
   order: 1;
+  flex: 1;
 
   .replyTo {
     font-weight: 500;
@@ -20,22 +21,23 @@ const CommentContent = ({comments, comment, currentUser, setComments, commentId,
   let replyingTo;
   if (comment.replyingTo) {
     replyingTo = <span className="replyTo">
-      @{comment.replyingTo}
+      @{comment.replyingTo},
     </span>
   }
 
   return (
-    <Main>
+    <Main>  
         <CommentHeader 
           user={user}
           createdAt={createdAt}
           currentUser={currentUser}
           comments={comments}
-          commentId
+          commentId={commentId}
+          setComments={setComments}
           setReplyToggle={setReplyToggle}
         />
         <main className="comment-main">
-          {replyingTo} {comment.content}
+          {replyingTo}  {comment.content}
         </main>
     </Main>
   )

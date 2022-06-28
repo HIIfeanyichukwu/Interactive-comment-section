@@ -44,10 +44,11 @@ const CommentReply = ({reply, comments, setComments, commentId, currentUser}) =>
             <Suspense>
                 <ReplyBox
                     setReplyToggle={setReplyToggle}
-                    user={reply.user.username}
+                    user={reply.user}
                     comments={comments}
                     commentId={commentId}
                     setComments={setComments}
+                    currentUser={currentUser}
                 />
             </Suspense>: null
         }

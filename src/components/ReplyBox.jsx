@@ -51,10 +51,46 @@ const Btn = styled.button`
     }
 `
 
-const ReplyBox = ({setReplyToggle, user, commentId, setComments, comments}) => {
+const ReplyBox = ({setReplyToggle, user, commentId, setComments, comments, currentUser}) => {
     const [content, setContent] = useState('')
     const handleReply = (e) => {
         e.preventDefault()
+        if (!content) {
+            setReplyToggle(false)
+            return;
+        }
+
+
+        let comment = comments.filter(comment => {
+            if (comment.id == commentId) return comment;
+        })
+        comment = comment[0]
+        let id; 
+        (comment.replies.length > 0)? id= comment.replies[comment.replies.length - 1].id + 1 : 1;
+
+        
+        let reply = [{
+            content,
+            createdAt: Date.now(),
+            id: id,
+            replyingTo: user.username,
+            score: 0,
+            user: currentUser
+        }]
+
+
+        let comments_map = Array.from(comments);
+        comments_map.map(comment => {
+            if (comment.id == commentId) {
+                let replies = Array.from(comment.replies);
+                let new_ = replies.concat(reply)
+                comment.replies = new_
+            }
+        })
+
+        console.log(comments_map)
+        setComments(comments_map)
+        setReplyToggle(false);
     }
   return (
     <Div>
@@ -65,10 +101,7 @@ const ReplyBox = ({setReplyToggle, user, commentId, setComments, comments}) => {
             purpose="reply"
         />
         <Btn
-            onClick={(e) => {
-                e.preventDefault()
-                setReplyToggle(false)
-            }}
+            onClick={handleReply}
         >
             REPLY
         </Btn>

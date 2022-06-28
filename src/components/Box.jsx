@@ -21,7 +21,6 @@ const Box = ({setContent, content, user, purpose}) => {
   const handleInput = (e) => {
     setContent(e.target.value);
   }
-  console.log(user)
   return (
     <>
       <IMG src={userImg} alt="user img" />

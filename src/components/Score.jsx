@@ -28,7 +28,8 @@ const ScoreComponent = styled.div`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    padding-inline: .5rem;
+    width: 30px;
+    height: 30px;
   }
 
   .plus:hover,.minus:hover {
@@ -40,6 +41,8 @@ const ScoreComponent = styled.div`
   @media (min-width: 740px) {
     flex-direction: column;
     order: 1;
+    width: 40px;
+    height: 100px;
     /* inline-size: initial; */
   }
   

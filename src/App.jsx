@@ -10,7 +10,6 @@ function App() {
   const [comments, setComments] = useState(data['comments']);
   const [currentUser, setCurrentUser] = useState(data.currentUser)
 
-  console.log(comments)
 
   let comments_map = Array.from(comments)
 
