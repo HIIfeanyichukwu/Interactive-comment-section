@@ -88,7 +88,6 @@ const ReplyBox = ({setReplyToggle, user, commentId, setComments, comments, curre
             }
         })
 
-        console.log(comments_map)
         setComments(comments_map)
         setReplyToggle(false);
     }

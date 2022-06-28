@@ -13,7 +13,7 @@ const Header = styled.header`
   }
 `
 
-const CommentHeader = ({user, createdAt, currentUser, setReplyToggle}) => {
+const CommentHeader = ({user, createdAt, currentUser, setReplyToggle, setDel, setEdit, del, edit}) => {
   let UserOptions;
   if (currentUser) {
     if (user.username == currentUser.username) {
@@ -29,7 +29,13 @@ const CommentHeader = ({user, createdAt, currentUser, setReplyToggle}) => {
     />
     {(UserOptions) ? 
     <Suspense>
-      <UserOptions/> 
+      {
+        (edit) ? null: 
+        <UserOptions
+          setDel={setDel}
+          setEdit={setEdit}
+        /> 
+      }
     </Suspense>: <Reply setReplyToggle={setReplyToggle}/>}
   </Header>
   )
