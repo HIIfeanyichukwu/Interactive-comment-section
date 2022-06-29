@@ -57,11 +57,10 @@ const Btn = styled.button`
   }
 `
 
-const CommentContent = ({comments, comment, currentUser, setComments, commentId, setReplyToggle}) => {
+const CommentContent = ({comments, comment, currentUser, setComments, commentId, setReplyToggle, isreply}) => {
   const [edit, setEdit] = useState(false)
   const [editContent, setEditContent] = useState(comment.content)
   const [del, setDel] = useState(false)
-  console.log(del)
 
   const Delete = lazy(() => import('./Delete')) ; 
 
@@ -102,13 +101,7 @@ const CommentContent = ({comments, comment, currentUser, setComments, commentId,
 
   return (
     <Main>
-      {
-        (del) ?
-        <Suspense>
-          <Delete />
-        </Suspense>
-        : null
-      }
+      
       <div className="main-container">
 
         <CommentHeader 
@@ -142,6 +135,20 @@ const CommentContent = ({comments, comment, currentUser, setComments, commentId,
           : null
         }
       </div>
+      {
+        (del) ?
+        <Suspense>
+          <Delete
+            setComments={setComments}
+            setDel={setDel}
+            comments={comments}
+            comment={comment}
+            isreply={isreply}
+            commentId={commentId}
+          />
+        </Suspense>
+        : null
+      }
     </Main>
   )
 }

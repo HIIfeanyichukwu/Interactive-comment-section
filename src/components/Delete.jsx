@@ -70,7 +70,36 @@ const Btn = styled.button`
     }
 `
 
-const Delete = ({setComments, setDel}) => {
+const Delete = ({setComments, comments, comment, isreply, setDel, commentId}) => {
+    const handleDelete = (e) => {
+        e.preventDefault()
+        let comments_map;
+        comments_map = Array.from(comments)
+        comments_map = comments_map.map(comment => {
+            return Object.assign(comment)
+        }) 
+        if (isreply) {
+           comments_map = comments_map.map(commentItem => {
+               if(!(commentId == commentItem.id)) {
+                   return commentItem
+               }
+               let replies = Array.from(commentItem.replies)
+               replies = replies.map(reply => Object.assign(reply))
+               replies = replies.filter(reply => reply.id != comment.id)
+               commentItem.replies = replies;
+               return commentItem
+           })
+        }else {
+            comments_map = comments_map.filter(commentItem => {
+                if (!(comment.id == commentItem.id)) {
+                    return commentItem
+                }
+            })
+        }
+
+        setDel(false)
+        setComments(comments_map)
+    }
   return (
     <DeleteComponent>
         <div className="del-backdrop">
@@ -82,10 +111,21 @@ const Delete = ({setComments, setDel}) => {
                     Are you sure you want to delete this comment? This will remove the comment and can't be undone.
                 </p>
                 <div className="btns">
-                    <Btn className='grey'>
+                    <Btn
+                     onClick={(e) => {
+                        e.preventDefault()
+                        setDel(false)
+                        document.querySelector('.App').classList.remove('hidden');
+                        return
+                     }}
+                     className='grey'
+                    >
                         NO, CANCEL
                     </Btn>
-                    <Btn className='red'>
+                    <Btn
+                        onClick={handleDelete} 
+                        className='red'
+                    >
                         YES, DELETE
                     </Btn>
                 </div>

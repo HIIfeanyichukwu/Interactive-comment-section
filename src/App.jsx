@@ -3,7 +3,6 @@ import './styles/App.css'
 import Comment from './components/Comment'
 import InputBox from './components/InputBox'
 import data from './util/data.json'
-import Delete from './components/Delete'
 
 
 
@@ -18,7 +17,6 @@ function App() {
 
   return (
     <div className="App">
-      <Delete />
       <div className="container">
         <div className='comments'>
           {
@@ -26,7 +24,7 @@ function App() {
               return (
 
                 <Comment 
-                  key={comment.id} 
+                  key={comment.id + comment.user.username} 
                   comment={comment}
                   comments={comments}
                   setComments={setComments}

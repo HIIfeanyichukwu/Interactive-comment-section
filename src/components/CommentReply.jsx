@@ -36,6 +36,7 @@ const CommentReply = ({reply, comments, setComments, commentId, currentUser}) =>
                 comments={comments}
                 setComments={setComments}
                 setReplyToggle={setReplyToggle}
+                isreply={true}
             />
         </CommentComponent>
 

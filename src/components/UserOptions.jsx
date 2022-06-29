@@ -56,8 +56,9 @@ const UserOptions = ({setDel, setEdit}) => {
             className='red'
             onClick={(e) => {
                 e.preventDefault()
-                console.log(typeof setDel)
                 setDel(true)
+                document.querySelector('.App').classList.add('hidden');
+                return;
             }}
         >
             <span className="icon">
