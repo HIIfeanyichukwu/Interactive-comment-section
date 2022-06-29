@@ -145,6 +145,7 @@ const CommentContent = ({comments, comment, currentUser, setComments, commentId,
             comment={comment}
             isreply={isreply}
             commentId={commentId}
+            currentUser={currentUser}
           />
         </Suspense>
         : null

@@ -40,7 +40,12 @@ const Comment = ({comments, comment, currentUser, setComments}) => {
     <CommentMain >
 
         <CommentComponent className='comment-component'>
-            <Score score={comment.score}/>
+            <Score 
+                score={comment.score}
+                setComments={setComments}
+                comment={comment}
+                comments={comments}
+            />
             <CommentContent 
                 comment={comment}
                 comments={comments}

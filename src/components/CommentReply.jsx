@@ -28,7 +28,15 @@ const CommentReply = ({reply, comments, setComments, commentId, currentUser}) =>
   return (
     <>
         <CommentComponent className='comment-component'>
-            <Score score={reply.score}/>
+            <Score 
+                score={reply.score}
+                setComments={setComments}
+                comment={reply}
+                isreply={true}
+                commentId={commentId}
+                comments={comments}
+                currentUser={currentUser}
+            />
             <CommentContent
                 comment={reply}
                 currentUser={currentUser}

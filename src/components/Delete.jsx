@@ -70,7 +70,7 @@ const Btn = styled.button`
     }
 `
 
-const Delete = ({setComments, comments, comment, isreply, setDel, commentId}) => {
+const Delete = ({setComments, comments, comment, isreply, setDel, commentId, currentUser}) => {
     const handleDelete = (e) => {
         e.preventDefault()
         let comments_map;
@@ -96,6 +96,12 @@ const Delete = ({setComments, comments, comment, isreply, setDel, commentId}) =>
                 }
             })
         }
+
+        let data = {
+            currentUser: currentUser,
+            comments: comments_map, 
+        }
+        localStorage.setItem('comments', JSON.stringify(data))
 
         setDel(false)
         setComments(comments_map)

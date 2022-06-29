@@ -88,6 +88,12 @@ const ReplyBox = ({setReplyToggle, user, commentId, setComments, comments, curre
             }
         })
 
+        let data = {
+            currentUser: currentUser,
+            comments: comments_map, 
+        }
+        localStorage.setItem('comments', JSON.stringify(data))
+
         setComments(comments_map)
         setReplyToggle(false);
     }

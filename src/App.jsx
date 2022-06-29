@@ -2,14 +2,15 @@ import { useState } from 'react'
 import './styles/App.css'
 import Comment from './components/Comment'
 import InputBox from './components/InputBox'
-import data from './util/data.json'
+import Data from './util/retrieveComments'
 
 
+
+const sortFunc = (a, b) => b.score - a.score;
 
 function App() {
-  const [comments, setComments] = useState(data['comments']);
-  const [currentUser, setCurrentUser] = useState(data.currentUser)
-
+  const [comments, setComments] = useState(Data()['comments'].sort(sortFunc));
+  const [currentUser, setCurrentUser] = useState(Data().currentUser)
 
 
 

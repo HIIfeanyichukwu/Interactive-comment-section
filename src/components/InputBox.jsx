@@ -62,6 +62,13 @@ const InputBox = ({setComments, comments, currentUser}) => {
         e.preventDefault();
         if (!content) return;
         comments = comments.concat([comment])
+
+        let data = {
+            currentUser: currentUser,
+            comments: comments, 
+        }
+        
+        localStorage.setItem('comments', JSON.stringify(data))
         setComments(comments);
         setContent('');
     }
