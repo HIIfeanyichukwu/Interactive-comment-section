@@ -70,18 +70,21 @@ const Score = ({score, setComments, comment, commentId, isreply, comments, curre
         commentItem.replies = replies;
         return commentItem
       })
-    }else {
-      // comments_map = comments_map.map(commentItem => {
-      //   if(!(commentItem.id == commentId)) return commentItem;
-      //   commentItem.score += 1;
-      //   return commentItem;
-      // })
     }
+
+    comments_map = comments_map.map(commentItem => {
+      if (!(commentId == commentItem.id)) return commentItem;
+      commentItem.score += 1;
+      return commentItem
+    })
+
+    
 
     let data = {
       currentUser: currentUser,
       comments: comments_map, 
     }
+
     localStorage.setItem('comments', JSON.stringify(data))
     setComments(comments_map)
     return;
@@ -104,18 +107,19 @@ const Score = ({score, setComments, comment, commentId, isreply, comments, curre
         replies = replies.map(reply => {
           if (!(reply.id == comment.id)) return reply;
           reply.score -= 1;
+          if (reply.score < 0) reply.score = 0;
           return reply
         })
         commentItem.replies = replies;
         return commentItem
       })
-    }else {
-      // comments_map = comments_map.map(commentItem => {
-      //   if(!(commentItem.id == commentId)) return commentItem;
-      //   commentItem.score += 1;
-      //   return commentItem;
-      // })
     }
+    comments_map = comments_map.map(commentItem => {
+      if (!(commentId == commentItem.id)) return commentItem;
+      commentItem.score -= 1;
+      if (commentItem.score < 0) commentItem.score = 0;
+      return commentItem
+    })
 
     let data = {
       currentUser: currentUser,

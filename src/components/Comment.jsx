@@ -45,6 +45,8 @@ const Comment = ({comments, comment, currentUser, setComments}) => {
                 setComments={setComments}
                 comment={comment}
                 comments={comments}
+                currentUser={currentUser}
+                commentId={comment.id}
             />
             <CommentContent 
                 comment={comment}
