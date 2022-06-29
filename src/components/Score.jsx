@@ -70,13 +70,15 @@ const Score = ({score, setComments, comment, commentId, isreply, comments, curre
         commentItem.replies = replies;
         return commentItem
       })
+    }else {
+
+      comments_map = comments_map.map(commentItem => {
+        if (!(commentId == commentItem.id)) return commentItem;
+        commentItem.score += 1;
+        return commentItem
+      })
     }
 
-    comments_map = comments_map.map(commentItem => {
-      if (!(commentId == commentItem.id)) return commentItem;
-      commentItem.score += 1;
-      return commentItem
-    })
 
     
 
@@ -113,13 +115,15 @@ const Score = ({score, setComments, comment, commentId, isreply, comments, curre
         commentItem.replies = replies;
         return commentItem
       })
+    }else {
+
+      comments_map = comments_map.map(commentItem => {
+        if (!(commentId == commentItem.id)) return commentItem;
+        commentItem.score -= 1;
+        if (commentItem.score < 0) commentItem.score = 0;
+        return commentItem
+      })
     }
-    comments_map = comments_map.map(commentItem => {
-      if (!(commentId == commentItem.id)) return commentItem;
-      commentItem.score -= 1;
-      if (commentItem.score < 0) commentItem.score = 0;
-      return commentItem
-    })
 
     let data = {
       currentUser: currentUser,

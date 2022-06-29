@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import userImg from '../images/avatars/image-juliusomo.png'
+import userImg from '/images/avatars/image-juliusomo.webp'
 
 const IMG = styled.img`
   width: 40px;

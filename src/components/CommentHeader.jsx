@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react'
 import styled from 'styled-components'
 import Reply from './Reply'
 import Avatar from './Avatar'
+import UserOptions from './UserOptions'
 
 const Header = styled.header`
   display: flex;
@@ -14,12 +15,25 @@ const Header = styled.header`
 `
 
 const CommentHeader = ({user, createdAt, currentUser, setReplyToggle, setDel, setEdit, edit}) => {
-  let UserOptions;
-  if (currentUser) {
-    if (user.username == currentUser.username) {
-      UserOptions = lazy(() => import('./UserOptions'))
+
+  let out;
+
+  if (currentUser && edit) {
+    out = null
+  }else {
+    if (currentUser) {
+      if (user.username == currentUser.username) {
+
+        out = <UserOptions
+          setDel={setDel}
+          setEdit={setEdit}
+        />
+      }else {
+        out = <Reply setReplyToggle={setReplyToggle}/>
+      }
     }
   }
+
   return (
   <Header>
     <Avatar 
@@ -27,16 +41,9 @@ const CommentHeader = ({user, createdAt, currentUser, setReplyToggle, setDel, se
       createdAt={createdAt}
       currentUser={currentUser}
     />
-    {(UserOptions) ? 
-    <Suspense>
-      {
-        (edit) ? null: 
-        <UserOptions
-          setDel={setDel}
-          setEdit={setEdit}
-        /> 
-      }
-    </Suspense>: <Reply setReplyToggle={setReplyToggle}/>}
+
+    {out}
+
   </Header>
   )
 }
