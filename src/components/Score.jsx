@@ -84,11 +84,11 @@ const Score = ({score, setComments, comment, commentId, isreply, comments, curre
 
     let data = {
       currentUser: currentUser,
-      comments: comments_map, 
+      comments: comments_map.sort((a, b) => b.score - a.score), 
     }
 
     localStorage.setItem('comments', JSON.stringify(data))
-    setComments(comments_map)
+    setComments(comments_map.sort((a, b) => b.score - a.score));
     return;
   }
 

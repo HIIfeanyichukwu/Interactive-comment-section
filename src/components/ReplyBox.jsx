@@ -66,7 +66,7 @@ const ReplyBox = ({setReplyToggle, user, commentId, setComments, comments, curre
         })
         comment = comment[0]
         let id; 
-        (comment.replies.length > 0)? id= comment.replies[comment.replies.length - 1].id + 1 : 1;
+        (comment.replies.length > 0)? id= comment.replies[comment.replies.length - 1].id + 1 : id = 1;
 
         
         let reply = [{
